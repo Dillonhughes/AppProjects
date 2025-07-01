@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import AircraftPage from './pages/AircraftPage';
+import PartsPage from './pages/PartsPage';
+import WorkOrdersPage from './pages/WorkOrdersPage';
 
-function App() {
-  const [aircraft, setAircraft] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/aircraft').then(res => setAircraft(res.data));
-  }, []);
-
+export default function App() {
   return (
-    <div>
-      <h1>Aircraft List</h1>
-      <ul>
-        {aircraft.map(a => (
-          <li key={a.id}>{a.tail_number} - {a.model}</li>
-        ))}
-      </ul>
-    </div>
+    <BrowserRouter>
+      <nav>
+        <Link to="/">Aircraft</Link> |{' '}
+        <Link to="/parts">Parts</Link> |{' '}
+        <Link to="/work-orders">Work Orders</Link>
+      </nav>
+      <Routes>
+        <Route path="/" element={<AircraftPage />} />
+        <Route path="/parts" element={<PartsPage />} />
+        <Route path="/work-orders" element={<WorkOrdersPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;

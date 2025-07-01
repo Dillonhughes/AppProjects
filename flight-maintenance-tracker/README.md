@@ -1,7 +1,6 @@
 # Flight Maintenance Tracker
 
-This project is a simple starter template for a Flight Maintenance Tracker app.
-It includes a Node.js/Express backend with MySQL and a React frontend built with Vite.
+This project provides a working Flight Maintenance Tracker application. It uses a Node.js/Express backend with MySQL and a React frontend built with Vite.
 
 ## Setup
 
@@ -18,14 +17,25 @@ It includes a Node.js/Express backend with MySQL and a React frontend built with
    ```
    This repository includes an `.npmrc` file in each project that points to the
    public npm registry.
-2. Configure the database settings in `backend/.env`.
-3. Start the backend server:
+2. Create a MySQL database and import `backend/schema.sql`.
+3. Configure the database settings in `backend/.env`.
+4. Start the backend server:
    ```bash
    npm start
    ```
-4. Start the frontend dev server:
+5. Start the frontend dev server:
    ```bash
    npm run dev
    ```
 
-This basic version exposes a few REST endpoints and displays a list of aircraft on the homepage.
+The backend exposes CRUD endpoints for aircraft, parts, work orders and labor logs, along with reporting routes. The frontend allows you to manage aircraft, parts and work orders from a web UI.
+
+### MySQL via Docker
+
+If you don't have MySQL installed locally you can start one with Docker:
+
+```bash
+docker run --name flight-mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=flight_tracker -p 3306:3306 -d mysql:8
+```
+
+Then update `backend/.env` with `DB_PASSWORD=secret`.
